@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.todoContainer{
+    background-color: #ffff ;
+    max-width: 500px;
+    margin: 50px  auto;
+    padding: 20px;
+}
+.todoContainer h1{
+    text-align: center;
+}
+.todoForm{
+    display: flex;
+    margin-bottom: 20px;
+}
+#todoInput{
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+}
+.todoForm button{
+  padding: 10px;
+}
+.todoList{
+    list-style: none;
+    padding: 0;
+}
+.todoItem{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #eee;
+    margin-bottom: 10px;
+}
+.todoItem span{
+  flex: 1;
+  margin: 0 10px;
+}
+.todoItem.completed .task{
+    text-decoration: line-through;
+    color: grey;
+}
+.todoItem button{
+    margin-left: 5px;
+  padding: 10px;
+}
