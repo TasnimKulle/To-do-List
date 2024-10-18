@@ -1,6 +1,14 @@
 const todoForm = document.querySelector(".todoForm");
 const todoInput = document.querySelector("#todoInput");
 const todoList = document.querySelector(".todoList");
+document.addEventListener('DOMContentLoaded',loadTask);
+function loadTask(){
+  const tasks=getTaskTolocalStorage();
+  tasks.forEach(task=> {
+    addTeskToDom(task)
+    
+  });
+}
 
 todoForm.addEventListener("submit", addTask);
 
@@ -14,9 +22,10 @@ function addTask(e) {
     const task = {
       id: Date.now(),
       text: taskText,
-      completed: true,
+      completed: false,
     };
     addTeskToDom(task);
+    saveTaskTolocalStorage(task)
   }
 }
 
@@ -32,5 +41,28 @@ function addTeskToDom(task) {
   
     `;
     todoList.appendChild(li)
-    console.log(li)
+    attachEventListener(li,task)
+    // console.log(li)
+}
+function attachEventListener(li,task){
+  const delenBtn=li.querySelector('.delete-btn');
+  delenBtn.addEventListener('click',function(){
+    handleDelete(task.id,li)
+  })
+}
+function handleDelete(id,li){
+  let tasks=getTaskTolocalStorage();
+  tasks=tasks.filter(task=>task.id!=id);
+  localStorage.setItem('tasks',JSON.stringify(tasks))
+  li.remove()
+
+}
+function saveTaskTolocalStorage(task){
+  const oldTask=getTaskTolocalStorage()
+  oldTask.push(task);
+  localStorage.setItem('tasks',JSON.stringify(oldTask))
+}
+function getTaskTolocalStorage(){
+  const oldTask= JSON.parse(localStorage.getItem('tasks'))||[];
+  return oldTask
 }
