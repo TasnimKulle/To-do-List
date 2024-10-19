@@ -46,10 +46,25 @@ function addTeskToDom(task) {
 }
 function attachEventListener(li,task){
   const delenBtn=li.querySelector('.delete-btn');
+  const editBtn=li.querySelector('.edit-btn')
   delenBtn.addEventListener('click',function(){
     handleDelete(task.id,li)
   })
+  editBtn.addEventListener('click',function(){
+    handleEdit(task.id,li)
+  })
 }
+
+function handleEdit(taskid , li){
+  const taskSpan=li.querySelector('.task')
+  // console.log(taskSpan.textContent)
+  const newTaskText=prompt("EDIT TASK",taskSpan.textContent)
+  if(newTaskText !== null && newTaskText.trim() !=="" ){
+    taskSpan.textContent=newTaskText
+  }
+  
+  }
+
 function handleDelete(id,li){
   let tasks=getTaskTolocalStorage();
   tasks=tasks.filter(task=>task.id!=id);
